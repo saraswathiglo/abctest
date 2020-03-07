@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -15,8 +15,13 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
+    protected $table = 'tblusers';
+    protected $primaryKey = 'UId';
+    /*protected $fillable = [
         'name', 'email', 'password', 'api_token',
+    ];*/
+    protected $fillable = [
+        'DisplayName', 'EmailId', 'Password',
     ];
 
     /**
@@ -24,8 +29,11 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
+    /*protected $hidden = [
         'password', 'remember_token',
+    ];*/
+    protected $hidden = [
+        'Password', 'RememberToken',
     ];
 
     /**
@@ -36,6 +44,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+
+    public function getEmailAttribute() {
+        return $this->attributes['EmailId'];
+    }
+
+    public function setEmailAttribute($value) {
+        $this->attributes['EmailId'] = $value;
+    }
+
+
 
     public function roles()
     {
@@ -68,8 +88,8 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         if ($this->roles()->where('name', $role)->first()) {
-        return true;
+            return true;
+        }
+      return false;
     }
-  return false;
-}
 }

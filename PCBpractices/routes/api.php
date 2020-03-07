@@ -17,7 +17,7 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
-Route::post('user', 'UserController@store'); //api through registration
+/*Route::post('user', 'UserController@store'); //api through registration
 Route::post('signin', 'UserController@signin');
 
 Route::middleware('auth:api')->get('user', 'UserController@index');
@@ -65,7 +65,7 @@ Route::get('organizations', 'OrganizationController@index');
 Route::get('organization/{id}', 'OrganizationController@show');
 Route::post('organization', 'OrganizationController@store');
 Route::post('organization/{id}', 'OrganizationController@update');
-Route::delete('organization/{id}', 'OrganizationController@delete');
+Route::delete('organization/{id}', 'OrganizationController@delete');*/
 
 /*Route::get('address', 'AddressController@index');
 Route::get('address/{id}', 'AddressController@show');
@@ -73,3 +73,41 @@ Route::post('address', 'AddressController@store');
 Route::post('address/{id}', 'AddressController@update');
 Route::delete('address/{id}', 'AddressController@delete');*/
 
+
+
+
+
+Route::get('role', 'RoleController@index');
+Route::get('role/{id}', 'RoleController@show');
+Route::post('role', 'RoleController@store');
+Route::put('role/{id}', 'RoleController@update');
+Route::delete('role/{id}', 'RoleController@delete');
+
+Route::get('operations', 'OperationsController@index');
+Route::get('operations/{id}', 'OperationsController@show');
+Route::post('operations', 'OperationsController@store');
+Route::put('operations/{id}', 'OperationsController@update');
+Route::delete('operations/{id}', 'OperationsController@delete');
+
+Route::get('features', 'FeaturesController@index');
+Route::get('features/{id}', 'FeaturesController@show');
+Route::post('features', 'FeaturesController@store');
+Route::put('features/{id}', 'FeaturesController@update');
+Route::delete('features/{id}', 'FeaturesController@delete');
+
+Route::get('featureoperations', 'FeatureoperationsController@index');
+//Route::get('featureoperations/{id}', 'FeatureoperationsController@show');
+Route::post('featureoperations', 'FeatureoperationsController@store');
+Route::put('featureoperations/{fid}/{oid}', 'FeatureoperationsController@update');
+Route::delete('featureoperations/{fid}/{oid}', 'FeatureoperationsController@delete');
+
+Route::get('rolefeature', 'RolefeaturesController@index');
+//Route::get('rolefeature/{id}', 'RolefeaturesController@show');
+Route::post('rolefeature', 'RolefeaturesController@store');
+Route::put('rolefeature/{id}', 'RolefeaturesController@update'); //nt
+Route::delete('rolefeature/{id}', 'RolefeaturesController@delete'); //nt
+
+/* USERS TBL */
+Route::post('user', 'UserController@store'); //api through registration
+Route::post('signin', 'UserController@signin');
+//Route::post('loginaccess', 'UserController@loginaccess');

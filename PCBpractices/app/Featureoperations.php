@@ -12,4 +12,9 @@ class Featureoperations extends Model
 	protected $fillable = [
     	'FeatureId','OperationId',
     ];
+
+    /*public function rolefeature()
+    {
+    	return $this->belongsTo('App\Featureoperations');
+    }*/
 }

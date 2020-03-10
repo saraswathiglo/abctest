@@ -130,20 +130,28 @@
                     </div>
                 </li>
                 <li class="nav-item nav-profile dropdown">
+                    <select id="convertor" style="margin-top: 7px" onchange="location =this.value;">
+                        <option value="">select language</option>
+                        <option value="{{ url('locale/ka') }}" @if(session('locale') =='ka') selected="selected" @endif>Kannada</option>
+                        <option value="{{ url('locale/en') }}" @if(session('locale') =='en') selected="selected" @endif>English</option>
+                    </select>
+                </li>
+                <li class="nav-item nav-profile dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                         <img  class="img-circle" src="{{asset('images/admin.png')}}" alt="profile"/>
                         <span class="nav-profile-name">Admin</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item">
+                        <a class="dropdown-item" href="{{ url('/admin/settings') }}">
                             <i class="mdi mdi-settings text-primary"></i>
-                            Settings
+                            {{ __('messages.Settings') }}
+
                         </a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             <i class="mdi mdi-logout text-primary"></i>
-                            {{ __('Logout') }}
+                            {{ __('messages.Logout') }}
                         </a>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                             @csrf
@@ -164,56 +172,62 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/dashboard') }}">
                         <i class="mdi mdi-home menu-icon"></i>
-                        <span class="menu-title">Dashboard</span>
+                        <span class="menu-title">{{ __('messages.Dashboard') }}</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin/Waste_Generators') }}">
+                    <a class="nav-link" href="{{ url('/admin/WasteGenerators') }}">
                         <i class="mdi mdi-upload menu-icon"></i>
-                        <span class="menu-title">Waste Generators</span>
+                        <span class="menu-title">{{ __('messages.WasteGenerators') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin/Waste_Disposal_Facilities') }}">
+                    <a class="nav-link" href="{{ url('/admin/WasteDisposalFacilities') }}">
                         <i class="mdi mdi-worker menu-icon"></i>
-                        <span class="menu-title">Waste Disposal Facilities</span>
+                        <span class="menu-title">{{ __('messages.WasteDisposalFacilities') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin/Vehicle_Types') }}">
+                    <a class="nav-link" href="{{ url('/admin/VehicleTypes') }}">
                         <i class="mdi mdi-truck menu-icon"></i>
-                        <span class="menu-title">Vehicle Types</span>
+                        <span class="menu-title">{{ __('messages.VehicleTypes') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/Employees') }}">
                         <i class="mdi mdi-account-multiple menu-icon"></i>
-                        <span class="menu-title">Employees</span>
+                        <span class="menu-title">{{ __('messages.Employees') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/Roles') }}">
                         <i class="mdi mdi-account-star menu-icon"></i>
-                        <span class="menu-title">Roles</span>
+                        <span class="menu-title">{{ __('messages.Roles') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin/Industry_Types') }}">
+                    <a class="nav-link" href="{{ url('/admin/IndustryTypes') }}">
                         <i class="mdi mdi-factory menu-icon"></i>
-                        <span class="menu-title">Industry Types</span>
+                        <span class="menu-title">{{ __('messages.IndustryTypes') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin/Waste_Types') }}">
+                    <a class="nav-link" href="{{ url('/admin/WasteTypes') }}">
                         <i class="mdi mdi-recycle menu-icon"></i>
-                        <span class="menu-title">Waste Types</span>
+                        <span class="menu-title">{{ __('messages.WasteTypes') }}</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/admin/Waste_Colors') }}">
+                    <a class="nav-link" href="{{ url('/admin/WasteColors') }}">
                         <i class="mdi mdi-format-color-fill menu-icon"></i>
-                        <span class="menu-title">Waste Colors</span>
+                        <span class="menu-title">{{ __('messages.WasteColors') }}</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/admin/RouteManagement') }}">
+                        <i class="mdi mdi-road-variant menu-icon"></i>
+                        <span class="menu-title">{{ __('messages.RouteManagement') }}</span>
                     </a>
                 </li>
                 {{--<li class="nav-item">
@@ -235,17 +249,17 @@
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="mdi mdi-clipboard-text menu-icon"></i>
-                        <span class="menu-title">SetUp</span>
+                        <span class="menu-title">{{ __('messages.SetUp') }}</span>
                         <i class="menu-arrow"></i>
                     </a>
                     <div class="collapse" id="ui-basic">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Country') }}">Country</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/State') }}">State</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/District') }}">District</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Taluk') }}">Taluk</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Panchayat') }}">Panchayat</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Village') }}">Village</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Country') }}">{{ __('messages.Country') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/State') }}">{{ __('messages.State') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/District') }}">{{ __('messages.District') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Taluk') }}">{{ __('messages.Taluk') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Panchayat') }}">{{ __('messages.Panchayat') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Village') }}">{{ __('messages.Village') }}</a></li>
 
                         </ul>
                     </div>

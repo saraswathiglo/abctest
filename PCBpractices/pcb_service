@@ -1,0 +1,16 @@
+Base_URL ==> http://192.168.0.136/PCB/public/api/
+
+SignIn (or) Login Service
+-------------------------------------
+Login Request ==> Base_URL/signin
+Request Type ==> POST
+Request ==>  {"email":"testone@gmail.com", "password":"test1234"}
+
+Response ==> {"status":"success","result":{"ApiToken":"muADQ9dqsMgEXIVAAdjdoVoS3wN3ewGDhEz2cdVcElPyPT0iv9zr6gFAngQM1Wy0nqgH5CDdvnEmkahpwDMffzTJ5U9WiZ9UNZeXfbLn8qSSYtYaVwF3XRqYd7hn4tbzYTUS5oGgVpjQxqcikt85de2020-03-1011:38:16","uid":1,"DisplayName":"test one","RoleName":"Admin","MainMenu":[{"FeatureId":1,"FeatureName":"Employee Master","SubMenu":{"11":{"FeatureId":11,"FeatureName":"Roles","Roles":{"view":"true","create":"true","update":"true","delete":"true"}},"22":{"FeatureId":22,"FeatureName":"Employee","Employee":{"view":"true","create":"true","update":"true","delete":"true"}}}},{"FeatureId":2,"FeatureName":"Location Master","SubMenu":{"12":{"FeatureId":12,"FeatureName":"States","States":{"view":"true","create":"true","update":"true","delete":"true"}},"13":{"FeatureId":13,"FeatureName":"Districts","Districts":{"view":"true","create":"true","update":"true","delete":"true"}},"14":{"FeatureId":14,"FeatureName":"Taluka","Taluka":{"view":"true","create":"true","update":"true","delete":"true"}},"15":{"FeatureId":15,"FeatureName":"Country","Country":{"view":"true","create":"true","update":"true","delete":"true"}},"16":{"FeatureId":16,"FeatureName":"Panchayatee","Panchayatee":{"view":"true","create":"true","update":"true","delete":"true"}},"17":{"FeatureId":17,"FeatureName":"Village","Village":{"view":"true","create":"true","update":"true","delete":"true"}}}},{"FeatureId":3,"FeatureName":"Masters","SubMenu":{"18":{"FeatureId":18,"FeatureName":"Waste Colors","Waste Colors":{"view":"true","create":"true","update":"true","delete":"true"}},"19":{"FeatureId":19,"FeatureName":"Waste types","Waste types":{"view":"true","create":"true","update":"true","delete":"true"}},"20":{"FeatureId":20,"FeatureName":"Industry Types","Industry Types":{"view":"true","create":"true","update":"true","delete":"true"}},"21":{"FeatureId":21,"FeatureName":"Vehicle Types","Vehicle Types":{"view":"true","create":"true","update":"true","delete":"true"}}}},{"FeatureId":23,"FeatureName":"Organizations","Submenu":{"24":{"FeatureId":24,"FeatureName":"Waste Generators","Waste Generators":{"view":"true","create":"true","update":"true","delete":"true"}}},"SubMenu":{"25":{"FeatureId":25,"FeatureName":"Waste Disposal Plants","Waste Disposal Plants":{"view":"true","create":"true","update":"true","delete":"true"}}}}]},"message":"Success"}
+
+Failure ==> {"status":"fail","result":[],"message":"Invalid Credentials"}
+
+
+--------------------------------------------------------------------------
+
+

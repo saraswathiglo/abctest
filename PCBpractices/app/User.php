@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable
      */
     protected $table = 'tblusers';
     protected $primaryKey = 'UId';
+    public $timestamps = false;
     /*protected $fillable = [
         'name', 'email', 'password', 'api_token',
     ];*/
@@ -45,7 +47,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
+    public function getAuthPassword()
+    {
+        return $this->Password;
+    }
 
     public function getEmailAttribute() {
         return $this->attributes['EmailId'];
@@ -56,11 +61,10 @@ class User extends Authenticatable
     }
 
 
-
     public function roles()
     {
-        return $this
-            ->belongsToMany('App\Role');
+        return $this->belongsTo('App\Role');
+        //return $this->belongsToMany('App\Role');
     }
 
     public function authorizeRoles($roles)
@@ -87,9 +91,14 @@ class User extends Authenticatable
     }
     public function hasRole($role)
     {
-        if ($this->roles()->where('name', $role)->first()) {
+        /*if ($this->roles()->where('name', $role)->first()) {
             return true;
         }
-      return false;
+        return false;*/
+
+        if (Role::where('RoleName', $role)->first()) {
+            return true;
+        }
+        return false;
     }
 }

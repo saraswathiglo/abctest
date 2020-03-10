@@ -104,8 +104,8 @@ Route::delete('featureoperations/{fid}/{oid}', 'FeatureoperationsController@dele
 Route::get('rolefeature', 'RolefeaturesController@index');
 //Route::get('rolefeature/{id}', 'RolefeaturesController@show');
 Route::post('rolefeature', 'RolefeaturesController@store');
-Route::put('rolefeature/{id}', 'RolefeaturesController@update'); //nt
-Route::delete('rolefeature/{id}', 'RolefeaturesController@delete'); //nt
+Route::put('rolefeature/{rid}/{fid}/{oid}', 'RolefeaturesController@update'); //nt
+Route::delete('rolefeature/{rid}/{fid}/{oid}', 'RolefeaturesController@delete'); //nt
 
 /* USERS TBL */
 Route::post('user', 'UserController@store'); //api through registration

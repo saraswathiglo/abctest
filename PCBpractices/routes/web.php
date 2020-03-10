@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('/login');
+});
+Route::get('/leaflet', function () {
+    return view('leaflet');
 });
 
 
@@ -41,20 +45,48 @@ Route::group(array('prefix'=>'admin','namespace' => 'Admin'), function() {
 
     Route::get('/admin', 'AdminController@index');
     Route::get('/dashboard', 'AdminController@dashboard');
-    Route::get('/Waste_Generators', 'AdminController@WasteGenerator');
-    Route::get('/Waste_Disposal_Facilities', 'AdminController@WasteDisposalFacilities');
-    Route::get('/Vehicle_Types', 'AdminController@VehicleType');
+    Route::get('/WasteGenerators', 'AdminController@WasteGenerator');
+    Route::get('/WasteDisposalFacilities', 'AdminController@WasteDisposalFacilities');
+    Route::get('/VehicleTypes', 'AdminController@VehicleType');
     Route::get('/Employees', 'AdminController@Employees');
     Route::get('/Roles', 'AdminController@Roles');
-    Route::get('/Industry_Types', 'AdminController@IndustryTypes');
-    Route::get('/Waste_Colors', 'AdminController@WasteColors');
-    Route::get('/Waste_Types', 'AdminController@WasteTypes');
+    Route::get('/IndustryTypes', 'AdminController@IndustryTypes');
+    Route::get('/addindustrytype', 'AdminController@addindustrytype');
+    Route::get('/WasteColors', 'AdminController@WasteColors');
+    Route::get('/addwastecolor', 'AdminController@addwastecolor');
+    Route::get('/WasteTypes', 'AdminController@WasteTypes');
+    Route::get('/addwastetype', 'AdminController@addwastetype');
     Route::get('/Country', 'AdminController@Country');
     Route::get('/State', 'AdminController@State');
     Route::get('/District', 'AdminController@District');
     Route::get('/Taluk', 'AdminController@Taluk');
     Route::get('/Panchayat', 'AdminController@Panchayat');
     Route::get('/Village', 'AdminController@Village');
-
+    Route::get('/addindustry', 'AdminController@addindustry');
+    Route::get('/Roles', 'AdminController@roles');
+    Route::get('/addroles', 'AdminController@addroles');
+    Route::get('/addrecycleplant', 'AdminController@addrecycleplant');
+    Route::get('/addvehicletype', 'AdminController@addvehicletype');
+    Route::get('/addemployee', 'AdminController@addroles');
+    Route::get('/settings', 'AdminController@settings');
+    Route::get('/RouteManagement', 'AdminController@routemanagement');
+    Route::get('/addroute', 'AdminController@addroute');
 
 });
+
+
+
+Route::get('/addindustrybranch', 'Admin\AdminController@addindustrybranch');
+Route::get('/addrecycleplantbranch', 'Admin\AdminController@addrecycleplantbranch');
+Route::get('/adduser', 'Admin\AdminController@adduser');
+
+Route::get('/industrybranches', 'Admin\AdminController@industrybranches');
+Route::get('/recycleplantbranches', 'Admin\AdminController@recycleplantbranches');
+Route::get('/userslist', 'Admin\AdminController@userslist');
+
+Route::get('locale/{locale}', function ($locale){
+    Session::put('locale', $locale);
+    return redirect()->back();
+});
+
+Route::match(['get', 'post'], '/botman', 'BotManController@handle');

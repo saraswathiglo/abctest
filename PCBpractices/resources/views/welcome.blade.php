@@ -105,7 +105,7 @@
                 <div class="title m-b-md">
                     {{--Laravel--}}
                 </div>
-
+                {{--<button onclick="myFunction()">Try it</button>--}}
                 <div class="links">
                     {{--<a href="https://laravel.com/docs">Docs</a>--}}
                     {{--<a href="https://laracasts.com">Laracasts</a>--}}
@@ -122,4 +122,29 @@
             &copy; All rights reserved
         </footer>
     </body>
+    <script src='{{ URL::to('/') }}/js/widget.js'></script>
+    <script src='{{ URL::to('/') }}/css/chat.min.css'></script>
+    <script>
+
+        var botmanWidget = {
+
+            aboutText: 'Waste Mangement',
+
+            introMessage: '<img height="70px" src="/images/robot/hirobot.png" id="image" width="auto"><br> Hi! I\'m WM <br>How can i help you'
+
+        };
+        function myFunction() {
+            var iframe = document.getElementById("chatBotManFrame");
+            var elmnt =iframe.contentWindow.document.getElementsByTagName("BODY")[0];
+            iframe.contentWindow.document.getElementsByTagName("HTML")[0].firstElementChild.innerHTML="<head><link rel='stylesheet' type='text/css' href='/css/chat.min.css'></head>";
+            elmnt.style.backgroundImage= 'none';
+            elmnt.style.background="linear-gradient(135deg, #708090 21px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),linear-gradient(225deg, #708090 21px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px";
+            elmnt.style.backgroundSize= "64px 128px";
+            elmnt.style.backgroundColor="#708090";
+        }
+    </script>
+
+
+
+
 </html>

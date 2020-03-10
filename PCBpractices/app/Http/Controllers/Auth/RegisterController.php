@@ -77,10 +77,9 @@ class RegisterController extends Controller
             'DisplayName' => $data['name'],
             'EmailId' => $data['email'],
             'Password' => Hash::make($data['password']),
-            'ApiToken' => Str::random(150).strtotime(Date('Y-m-d H:i:s')),
-            'UserId' => 1,
+            //'ApiToken' => Str::random(150).strtotime(Date('Y-m-d H:i:s')),
+            'UserId' => $data['email'],
             'RoleId' => 1,
-
         ];
         //dd($inputdata);
         return DB::table('tblusers')->insert($inputdata);

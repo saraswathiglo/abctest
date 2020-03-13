@@ -110,4 +110,8 @@ Route::delete('rolefeature/{rid}/{fid}/{oid}', 'RolefeaturesController@delete');
 /* USERS TBL */
 Route::post('user', 'UserController@store'); //api through registration
 Route::post('signin', 'UserController@signin');
+Route::middleware('auth:api')->post('transporterroute', 'TransporterController@transporterroute');
+Route::middleware('auth:api')->post('wastepickups', 'TransporterController@wastepickups');
+
+//Route::get('driverassignment', 'TransporterController@driverassignment');
 //Route::post('loginaccess', 'UserController@loginaccess');

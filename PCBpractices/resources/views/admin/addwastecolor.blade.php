@@ -32,11 +32,6 @@
                             <label>Waste Color:</label>
                             <input type="text" name="waste_color" class="form-control" placeholder="Enter Waste Color">
                         </div>
-                        <div class="form-group">
-                            <label>Waste Color Code:</label>
-                            <input type="text" name="waste_color_code" class="form-control"
-                                   placeholder="Enter Waste Color Code">
-                        </div>
                         <div class="clearfix"></div>
                         <div class="col-sm-3">
                             <div class="form-group">

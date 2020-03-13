@@ -101,7 +101,7 @@ class UserController extends Controller
         $password = $request->password;
         if ($validator->fails()) {
             //return response()->json(['error'=>$validator->errors(), 'result' => [], 'message'=> 'Validation Error']);
-            return response()->json(['status'=>'fail', 'result' => [], 'message'=> 'Validation Error']);
+            return response()->json(['status'=>'failed', 'result' => [], 'message'=> 'Validation Error']);
         }
         if (Auth::attempt(['EmailId' => $email, 'password' => $password]))
         {
@@ -120,58 +120,107 @@ class UserController extends Controller
             ];
             $logs = Logs::insert($loginput);
             //return response()->json(['success'=>'success', 'result' => $userdata], 200);
-            $data = array();
+            $result = array();
             $RoleId = $userdata->RoleId;
-            $data['ApiToken'] = $userdata->ApiToken;
-            $data['uid'] = $uid;
-            $data['DisplayName'] = $userdata->DisplayName;
+            $result['ApiToken'] = $userdata->ApiToken;
+            $result['uid'] = $uid;
+            $result['DisplayName'] = $userdata->DisplayName;
             $mainmenu = DB::table('tblrolefeatures as rf')
                 ->join('tblfeatures as f', 'rf.FeatureId', '=', 'f.FeatureId')
                 ->join('tbloperations as o', 'rf.OperationId', '=', 'o.OperationId')
                 ->join('tblroles as r', 'rf.RoleId', '=', 'r.RoleId')
                 ->where('f.FeatureType','=','MainMenu')
                 ->where('rf.RoleId','=',$RoleId)
-                ->select('rf.*', 'f.FeatureName', 'f.FeatureType', 'f.FeatureTypeId', 'o.OperationName', 'r.RoleName')
+                ->select('f.FeatureName', 'f.FeatureId', 'r.RoleName', 'f.MenuOrder')
                 ->get();
-            $i = 0;
+            $i = 0;$submenuarray = [];
+            
             foreach($mainmenu as $row){
-                $data['RoleName'] = $row->RoleName;
-                ///*$data[$row->FeatureType][$i][$row->FeatureId] = $row->FeatureName;*/
-                //$data[$row->FeatureType][$row->FeatureId][$row->FeatureId] = $row->FeatureName;
-
-                $data[$row->FeatureType][$i]["FeatureId"] = $row->FeatureId;
-                $data[$row->FeatureType][$i]["FeatureName"] = $row->FeatureName;
-                //$data[$row->FeatureType][$i]["FeatureType"] = $row->FeatureType;
+                $result['RoleName'] = $row->RoleName;
+                //DB::enableQuerylog();
                 $submenu = DB::table('tblrolefeatures as rf')
                     ->join('tblfeatures as f', 'rf.FeatureId', '=', 'f.FeatureId')
-                    ->join('tbloperations as o', 'rf.OperationId', '=', 'o.OperationId')
-                    ->where('f.FeatureType','=','SubMenu')->where('f.FeatureTypeId','=',$row->FeatureId)->where('rf.RoleId','=',$RoleId)
-                    ->select('rf.*', 'f.FeatureName', 'f.FeatureType', 'f.FeatureTypeId', 'o.OperationName')
+                    ->where('f.FeatureType','=','SubMenu')
+                    ->where('f.FeatureTypeId','=', $row->FeatureId)
+                    ->where('rf.RoleId','=',$RoleId)
+                    ->select('rf.FeatureId', 'f.FeatureName', 'f.MenuOrder')
+                    ->groupby('rf.FeatureId' , 'f.FeatureName', 'f.MenuOrder')
                     ->get();
-                $j = 0;
-                foreach ($submenu as $subrow) {
-                    ///*$data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId] = $subrow->FeatureName;*/
-                    ///*$data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureName][$subrow->OperationName] = 'true'; // after submenu operations shown*/
-                    $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId]['FeatureId'] = $subrow->FeatureId;
-                    $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId]['FeatureName'] = $subrow->FeatureName;
-                    $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId][$subrow->FeatureName][$subrow->OperationName] = 'true';
-                    //$data[$row->FeatureType][$row->FeatureId][$subrow->FeatureType][$subrow->FeatureId] = $subrow->FeatureName;
-                        /*$operations = DB::table('tbloperations as o')
-                            ->where('o.OperationId','=',$subrow->OperationId)
-                            ->select('o.OperationName')
-                            ->get();
-                            foreach($operations as $rowop){
-                                $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureName][$rowop->OperationName] = 'true';
+                    $sub_menu2 = array();
+                foreach($submenu as $row2){
+                    $permissions = DB::table('tblrolefeatures as rf')
+                                ->join('tbloperations as o', 'rf.OperationId', '=', 'o.OperationId')
+                                ->where('rf.RoleId','=',$RoleId)
+                                ->where('rf.FeatureId','=', $row2->FeatureId)
+                                ->select('rf.OperationId' , 'o.OperationName')
+                                ->get();
+                    $sub_menu2[] = array('FeatureId' => $row2->FeatureId ,
+                              'FeatureName' => $row2->FeatureName ,
+                              'SubMenuOrder' => $row2->MenuOrder ,
+                              'permissions' => $permissions );
+                }    
+                //print_r(DB::getQuerylog());
+                $menu = array('FeatureId' => $row->FeatureId ,
+                              'FeatureName' => $row->FeatureName ,
+                              'MenuOrder' => $row->MenuOrder ,
+                              'sub_menu' => $sub_menu2 );    
 
-                            }*/
+                $result['menulist'][] = $menu; 
+                // $data['RoleName'] = $row->RoleName;
+                // ///*$data[$row->FeatureType][$i][$row->FeatureId] = $row->FeatureName;*/
+                // //$data[$row->FeatureType][$row->FeatureId][$row->FeatureId] = $row->FeatureName;
 
-                    $j++;
-                }
-                $i++;   
+                // $data[$row->FeatureType][$i]["FeatureId"] = $row->FeatureId;
+                // $data[$row->FeatureType][$i]["FeatureName"] = $row->FeatureName;
+                // //$data[$row->FeatureType][$i]["FeatureType"] = $row->FeatureType;
+                // $submenu = DB::table('tblrolefeatures as rf')
+                //     ->join('tblfeatures as f', 'rf.FeatureId', '=', 'f.FeatureId')
+                //     ->join('tbloperations as o', 'rf.OperationId', '=', 'o.OperationId')
+                //     ->where('f.FeatureType','=','SubMenu')->where('f.FeatureTypeId','=',$row->FeatureId)->where('rf.RoleId','=',$RoleId)
+                //     //->select('rf.*', 'f.FeatureName', 'f.FeatureType', 'f.FeatureTypeId', 'o.OperationName')
+                //     ->select('f.FeatureId', 'f.FeatureName')
+                //     ->get();
+                // $j = 0;
+
+                
+                // foreach ($submenu as $subrow) {
+                //     ///*$data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId] = $subrow->FeatureName;*/
+                //     ///*$data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureName][$subrow->OperationName] = 'true'; // after submenu operations shown*/
+                    
+
+                //     $submenuarray [$subrow->FeatureId] = ['FeatureId' => $subrow->FeatureId , 
+                //                         'FeatureName' => $subrow->FeatureName];
+
+                //     //$data[$row->FeatureType][$i][$subrow->FeatureType][$i] = $subrow->FeatureId;
+                //     //$data[$row->FeatureType][$i][$subrow->FeatureType] = $subrow->FeatureName;
+                //     //$data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId][$subrow->FeatureName][$subrow->OperationName] = 'true';
+
+                //     /*///*$data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId]['FeatureId'] = $subrow->FeatureId;
+                //     $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId]['FeatureName'] = $subrow->FeatureName;
+                //     $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureId][$subrow->FeatureName][$subrow->OperationName] = 'true';*/
+
+
+                //     //$data[$row->FeatureType][$row->FeatureId][$subrow->FeatureType][$subrow->FeatureId] = $subrow->FeatureName;
+                //         /*$operations = DB::table('tbloperations as o')
+                //             ->where('o.OperationId','=',$subrow->OperationId)
+                //             ->select('o.OperationName')
+                //             ->get();
+                //             foreach($operations as $rowop){
+                //                 $data[$row->FeatureType][$i][$subrow->FeatureType][$subrow->FeatureName][$rowop->OperationName] = 'true';
+
+                //             }*/
+
+                //     $j++;
+                // }
+                // //$data['submenu'] = $submenu;
+                // $i++;   
+
             }
-            return response()->json(['status'=>'success', 'result' => $data, 'message' => 'Success']);
+            //dd($submenuarray);
+            
+            return response()->json(['status'=>'success', 'result' => $result, 'message' => 'Success']);
         }
-        return response()->json(['status'=>'fail', 'result' => [], 'message' => 'Invalid Credentials']);
+        return response()->json(['status'=>'failed', 'result' => [], 'message' => 'Invalid Credentials']);
 
 
 
@@ -238,7 +287,6 @@ class UserController extends Controller
                 }
                 
         }*/
-
     }
 
     public function delete(Request $request, $uid)
@@ -253,8 +301,6 @@ class UserController extends Controller
         $loginInfo=$request->all();
         if (Auth::attempt(['EmailId' => $loginInfo['email'], 'password' => $loginInfo['password']])) {
             if( Auth::user()->hasRole('Admin')) {
-                // dd(888);
-                // dd(Auth::user());
                 return redirect('/admin/admin');
             }
             if( Auth::user()->hasRole('Transporter')) {
@@ -279,5 +325,43 @@ class UserController extends Controller
         }
     }
 
+    public function transporterassignment()
+    {
+        if(Auth::id()){
+            $uid = Auth::id();
+
+
+
+            DB::enableQuerylog();
+            $assignroute = DB::table('tbldriverroutes as dr')
+                ->join('tblusers as u','dr.UId','=','u.UId')
+                ->join('tblvehicles as v','dr.VehicleId','=','v.VehicleId')
+                ->join('tblroutelocations as rl','dr.RouteId','=','rl.RouteId')
+                ->join('tblbranchs as b','rl.BranchId','=','b.BranchId')            
+                ->where('dr.Status','=',1)->where('v.Status','=',1)
+                ->where('b.Status','=',1)->where('u.Status','=',1)
+                ->where('dr.UId','=',$uid)
+                ->select('u.DisplayName','v.VehicleName', 'v.VehicleNumber','b.BranchName','b.Latitude','b.Longitude','b.Location', 'dr.StartDate', 'dr.StartTime')->get();
+                //return print_r(DB::getQuerylog());
+            $locations = []; $result = []; $i = 0;
+            foreach ($assignroute as $row) {
+                $locations[$i]['BranchName'] = $row->BranchName;
+                $locations[$i]['Latitude'] = $row->Latitude;
+                $locations[$i]['Longitude'] = $row->Longitude;
+                $locations[$i]['Location'] = $row->Location;
+
+                $result = array( 'DisplayName' => $row->DisplayName,
+                    'VehicleName' => $row->VehicleName,
+                    'VehicleNumber' => $row->VehicleNumber,
+                    'StartDate' => $row->StartDate,
+                    'StartTime' => $row->StartTime,
+                    'locations' => $locations,
+                );
+                $i++;
+            }
+            return response()->json(['status'=>'success', 'result' => $result, 'message' => 'Success']);
+        }
+        return response()->json(['status'=>'failed', 'result' => $result, 'message' => 'Invalid Credentials']);
+    }
 
 }

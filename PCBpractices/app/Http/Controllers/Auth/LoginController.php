@@ -46,4 +46,9 @@ class LoginController extends Controller
     {
         return 'Password';
     }
+
+    public function ApiToken()
+    {
+        return 'ApiToken';
+    }
 }

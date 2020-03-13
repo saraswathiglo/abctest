@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
-                    <a href="{{ url('admin/dashboard') }}">
+                    <a href="{{ url('admin/District') }}">
                         <button class="btn btn-primary mt-2 mt-xl-0"> >> Back</button>
                     </a>
                 </div>

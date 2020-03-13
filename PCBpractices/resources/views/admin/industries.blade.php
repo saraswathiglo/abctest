@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                     <div class="mr-md-3 mr-xl-5">
-                        <h3>Industries</h3>
+                        <h3>Waste Generator</h3>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
@@ -17,7 +17,7 @@
                         </button>
                     </a>
                     <a href="{{ url('admin/addindustry') }}">
-                        <button class="btn btn-primary mt-2 mt-xl-0">Add Industry</button>
+                        <button class="btn btn-primary mt-2 mt-xl-0">Add Waste Generator</button>
                     </a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
         <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Industries List</p>
+                    <p class="card-title">Waste Generators List</p>
 
                     <div class="table-responsive">
                         <table id="recent-purchases-listing" class="table">
@@ -37,16 +37,14 @@
                                 <th>S.No.</th>
                                 <th>Name</th>
                                 <th>Type</th>
-                                <th>Registration Id</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>ABC</td>
-                                <td>abc</td>
-                                <td>KNPCB-123</td>
+                                <td>Care Hospital</td>
+                                <td>Hospital</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>
@@ -61,9 +59,8 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>XYZ</td>
-                                <td>xyz</td>
-                                <td>KNPCB-987</td>
+                                <td>GVK</td>
+                                <td>Malls</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>

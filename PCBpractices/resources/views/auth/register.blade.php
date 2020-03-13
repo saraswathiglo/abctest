@@ -135,14 +135,14 @@
                                 {{ __('Register') }} now
                             </button>
                         </div>
-                        <div class="flex-col-c p-t-140 p-b-40">
+                        <!-- <div class="flex-col-c p-t-140 p-b-40">
                                 <span class="txt1 p-b-9">
                                     Already have an account?
                                 </span>
                             <a href="{{ route('login') }}" class="txt3">
                                 {{ __('Login') }} now
                             </a>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>

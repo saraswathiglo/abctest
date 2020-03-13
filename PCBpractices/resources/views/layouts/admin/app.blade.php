@@ -36,7 +36,7 @@
                 <span class="mdi mdi-sort-variant"></span>
             </button>
             <ul class="navbar-nav navbar-nav-right">
-                <li class="nav-item dropdown mr-1">
+                <!-- <li class="nav-item dropdown mr-1">
                     <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
                         <i class="mdi mdi-message-text mx-0"></i>
                         <span class="count"></span>
@@ -128,7 +128,7 @@
                             </div>
                         </a>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item nav-profile dropdown">
                     <select id="convertor" style="margin-top: 7px" onchange="location =this.value;">
                         <option value="">select language</option>
@@ -177,6 +177,101 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-organizations" aria-expanded="false" aria-controls="ui-organizations">
+                        <i class="mdi mdi-clipboard-text menu-icon"></i>
+                        <span class="menu-title">{{ __('Organizations') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-organizations">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteGenerators') }}">{{ __('Waste Generators') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteDisposals') }}">{{ __('Waste Disposals (Plants)') }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-routes" aria-expanded="false" aria-controls="ui-routes">
+                        <i class="mdi mdi-clipboard-text menu-icon"></i>
+                        <span class="menu-title">{{ __('Routes') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-routes">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/addroute') }}">{{ __('Add Route Locations') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/driverroute') }}">{{ __('Assign Route') }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-employee" aria-expanded="false" aria-controls="ui-employee">
+                        <i class="mdi mdi-clipboard-text menu-icon"></i>
+                        <span class="menu-title">{{ __('Employees') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-employee">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Roles') }}">{{ __('Roles') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="#">{{ __('Employee') }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-masters" aria-expanded="false" aria-controls="ui-masters">
+                        <i class="mdi mdi-clipboard-text menu-icon"></i>
+                        <span class="menu-title">{{ __(' Masters') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-masters">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteColors') }}">{{ __('Waste Colors') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteTypes') }}">{{ __('Waste Types') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/VehicleTypes') }}">{{ __('Vehicle Types') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/IndustryTypes') }}">{{ __('Industry Types') }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-locationmaster" aria-expanded="false" aria-controls="ui-locationmaster">
+                        <i class="mdi mdi-clipboard-text menu-icon"></i>
+                        <span class="menu-title">{{ __('Locations') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-locationmaster">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Country') }}">{{ __('messages.Country') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/State') }}">{{ __('messages.State') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/District') }}">{{ __('messages.District') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Taluk') }}">{{ __('messages.Taluk') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Panchayat') }}">{{ __('messages.Panchayat') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Village') }}">{{ __('messages.Village') }}</a></li>
+
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" href="#ui-transporterservice" aria-expanded="false" aria-controls="ui-transporterservice">
+                        <i class="mdi mdi-clipboard-text menu-icon"></i>
+                        <span class="menu-title">{{ __('Transporter Service') }}</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="collapse" id="ui-transporterservice">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="">{{ __('Generate QR Code') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="">{{ __('Waste Collection') }}</a></li>
+                        </ul>
+                    </div>
+                </li>
+                              
+
+
+                
+
+                {{--<li class="nav-item">
                     <a class="nav-link" href="{{ url('/admin/WasteGenerators') }}">
                         <i class="mdi mdi-upload menu-icon"></i>
                         <span class="menu-title">{{ __('messages.WasteGenerators') }}</span>
@@ -230,6 +325,8 @@
                         <span class="menu-title">{{ __('messages.RouteManagement') }}</span>
                     </a>
                 </li>
+
+
                 {{--<li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
                         <i class="mdi mdi-account menu-icon"></i>
@@ -246,7 +343,7 @@
                         </ul>
                     </div>
                 </li>--}}
-                <li class="nav-item">
+                {{--<li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
                         <i class="mdi mdi-clipboard-text menu-icon"></i>
                         <span class="menu-title">{{ __('messages.SetUp') }}</span>
@@ -264,7 +361,7 @@
                         </ul>
                     </div>
                 </li>
-            </ul>
+            </ul> --}}
         </nav>
         <!-- partial -->
         <div class="main-panel">
@@ -275,7 +372,8 @@
             <!-- partial:partials/_footer.html -->
             <footer class="footer" style="z-index: 1030;position: fixed;">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between text-center">
-                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2020 <a href="" target="_blank">Waste Mangement</a>. All rights reserved.</span>
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
+                        <?php echo Date('Y');?> MV INFRA SERVICES PVT., LTD. ©  <a href="" target="_blank"></a> All rights reserved.</span>
                 </div>
             </footer>
             <!-- partial -->

@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Locations;
+//use App\Locations;
+use App\Orgbranches;
+use App\Routes;
+use App\Routelocations;
+use DB;
 
 class AdminController extends Controller
 {
@@ -25,7 +29,6 @@ class AdminController extends Controller
     }
     public function WasteGenerator()
     {
-
         return view('admin.industries');
     }
     public function WasteDisposalFacilities()
@@ -68,36 +71,58 @@ class AdminController extends Controller
 
         return view('admin.wastetypes');
     }
+
+
     public function Country()
     {
-
+        return view('admin.countries');
+    }
+    public function addCountry()
+    {
         return view('admin.addcountry');
     }
     public function State()
     {
-
+        return view('admin.states');
+    }
+    public function addState()
+    {
         return view('admin.addstate');
     }
     public function District()
     {
-
+        return view('admin.districts');
+    }
+    public function addDistrict()
+    {
         return view('admin.adddistrict');
     }
     public function Taluk()
     {
-
+        return view('admin.talukas');
+    }
+    public function addTaluk()
+    {
         return view('admin.addtaluk');
     }
     public function Panchayat()
     {
-
+        return view('admin.addpanchayates');
+    }
+    public function addPanchayat()
+    {
         return view('admin.addpanchayat');
     }
     public function Village()
     {
-
+        return view('admin.villages');
+    }
+    public function addVillage()
+    {
         return view('admin.addvillage');
     }
+
+
     public function addroles()
     {
 
@@ -151,8 +176,15 @@ class AdminController extends Controller
     }
     public function addroute()
     {
-        $locations = Locations::get();
-        return view('admin.addroute', ['locations' => $locations]);
+        //$locations = Orgbranches::get();
+        $locations = DB::table('tblbranchs as ob')
+            ->join('tblorganizations as o', 'o.OrgId', '=', 'ob.OrgId')
+            ->join('lookupentity as le', 'o.OrgTypeId', '=', 'le.EntityId')
+            ->join('lookupgroups as lg', 'le.GroupId', '=', 'lg.GroupId')
+            ->select('ob.*')->where('lg.GroupId','=',3) // 3 = waste generators
+            ->get();
+        $routes = Routes::get();
+        return view('admin.addroute', ['routes' => $routes, 'locations' => $locations]);
     }
 
 
@@ -194,8 +226,45 @@ class AdminController extends Controller
         return view('admin.settings');
     }
 
-    public function add_route(Request $request)
+    public function routelocations(Request $request)
     {
-        print_r($request);dd();
+        $locations = $request->locations;
+        $RouteId = $request->route_name;
+        //print_r($RouteId);dd();
+        foreach($locations as $branchid)
+        {
+            $inputdata = array(
+                'RouteId' => $RouteId,
+                'BranchId' => $branchid['loc_id'],
+                //'location_name' => $branchid['loc_name'],
+            );
+            DB::table('tblroutelocations')->insert($inputdata);
+            //$route_location = Routelocations::create($inputdata);
+            //$route_location->save();
+        }
+        return json_encode(['data'=>'true']);
+    }
+
+    public function driverroute()
+    {
+        $routes = Routes::get();
+        $drivers = DB::table('tblusers')->where('RoleId', 6)->where('Status',1)->get();
+        $vehicles = DB::table('tblvehicles')->where('Status',1)->get();
+        return view('admin.adddriverroute', ['routes' => $routes, 'drivers' => $drivers, 'vehicles' => $vehicles]);
+    }
+    public function createdriverroute(Request $request)
+    {
+        $inputdata = array(
+            'UId' => $request->driver,
+            'VehicleId' => $request->vehicle,
+            'RouteId' => $request->route_name,            
+            'AssignedDate' => Date('Y-m-d'),
+            'AssignedTime' => Date('H:i:s'),
+            'StartDate' => $request->start_date,
+            'StartTime' => $request->start_time,
+            'AssignedBy' => Auth::id(),
+        );
+        DB::table('tbldriverroutes')->insert($inputdata);
+        return redirect('admin/driverroute');
     }
 }

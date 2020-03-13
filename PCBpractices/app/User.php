@@ -101,4 +101,18 @@ class User extends Authenticatable
         }
         return false;
     }
+
+    public function checkrolefeatureoperation($UId, $FeatureId, $OperationId)
+    {
+        if($user = User::select('RoleId')->where('UId', $UId)->first())
+        {
+            $RoleId = $user->RoleId;
+            if(Rolefeatures::where(['RoleId' => $RoleId, 'FeatureId' => $FeatureId, 'OperationId' => $OperationId])->first())
+            {
+                return 1;
+            }
+            return 0;
+        }
+        return 0;
+    }
 }

@@ -1,6 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('content')
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
@@ -21,7 +22,8 @@
             </div>
         </div>
     </div>
-
+    <form method="POST" action="#">
+        {{csrf_field()}}
     <div class="row">
         <div class="col-md-6 stretch-card">
 
@@ -39,11 +41,16 @@
                     </table>
                     <div class="form-group">
                         <label for="route_name">Route</label>
-                        <input type="text" class="form-control" name="route_name" placeholder="Route">
+                        <!--<input type="text" class="form-control" name="route_name" placeholder="Route">-->
+                        <select class="form-control" name="route_name">
+                            @foreach($routes as $route)
+                            <option value="{{$route->RouteId}}">{{ $route->RouteName }}</option>
+                            @endforeach
+                        </select>
                         <label for="route_name">Location</label>
                         <select class="form-control" name = "location" id = "location">
                             @foreach($locations as $location)
-                            <option value="{{$location->id}}">{{ $location->name }}</option>
+                            <option value="{{$location->BranchId}}">{{ $location->Location }}</option>
                             @endforeach
                         </select>
 
@@ -118,7 +125,7 @@
         </div>
         <div class="col-md-6 stretch-card" id = "map" ></div>
     </div>
-
+    </form>
 
     <script>
         var mapOptions = {
@@ -208,10 +215,12 @@
         }
 
         function add_route(){
-            var route_name = document.getElementById("route_name").value;
+            //var route_name = document.getElementById("route_name").value;
+            var route_name = $('#location').find('option:selected').val();
             //var special_note = document.getElementById("special_note").value;
             route_name = route_name.trim();
             //special_note = special_note.trim();
+             var csrf_token = $('meta[name="csrf-token"]').attr('content');
             if(route_name.length === 0){
                 console.log("","Please Enter Route Name", "error");
             }
@@ -223,27 +232,31 @@
                     var form_data = {
                         "route_name" : route_name,
                         "locations" : locations,
-                        "special_note" : special_note
+                        //"special_note" : special_note
                     }
+                    console.log(form_data);
                     $.ajax({
                         // url: base_path+'/fleet/add_route',
-                        url: '../admin/add_route',
+                        url: '../admin/routelocations',
                         dataType: 'json' ,
-                        headers: {'X-CSRF-TOKEN': window.Laravel.csrfToken },
+                        //headers: {'X-CSRF-TOKEN': 'test'},
+                        //headers: {'X-CSRF-TOKEN': window.Laravel.csrfToken },
+                        headers: {'X-CSRF-TOKEN':  csrf_token},
+
                         type: 'POST',
                         data: form_data,
                         success: function(data) {
-                            console.log(data);
+                            //console.log(data);
                             console.log("","added successfully", "success");
-
+                            alert('Location added');
                             // window.location.replace('../fleet/add_route');
                         },
                         error: function(data) {
-                            console.log(data);
+                           // console.log(data);
                             console.log("","Something Went Wrong with adding ", "error");
                         }
                     });
-                    console.log(data);
+                    //console.log(data);
                 }
                 //console.log("","added", "success");
             }

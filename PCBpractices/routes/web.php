@@ -34,46 +34,60 @@ Route::post('/userlogin', 'UserController@login');
 
 Route::get('barcode', 'HomeController@barcode');
 
-Route::get('/wastegenerator', 'WasteGeneratorController@index');
+//Route::get('/wastegenerator', 'WasteGeneratorController@index');
 
 Route::get('/wastedisposalfacility', 'WasteDisposalFacilityController@index');
 
 Route::get('/transporter', 'TransporterController@index');
 
 
-Route::group(array('prefix'=>'admin','namespace' => 'Admin'), function() {
+Route::group(array('prefix'=>'admin', 'namespace' => 'Admin'), function() {
 
     Route::get('/admin', 'AdminController@index');
     Route::get('/dashboard', 'AdminController@dashboard');
-    Route::get('/WasteGenerators', 'AdminController@WasteGenerator');
-    Route::get('/WasteDisposalFacilities', 'AdminController@WasteDisposalFacilities');
-    Route::get('/VehicleTypes', 'AdminController@VehicleType');
-    Route::get('/Employees', 'AdminController@Employees');
-    Route::get('/Roles', 'AdminController@Roles');
-    Route::get('/IndustryTypes', 'AdminController@IndustryTypes');
-    Route::get('/addindustrytype', 'AdminController@addindustrytype');
+    
+    Route::get('/Country', 'AdminController@Country');
+    Route::get('/addCountry', 'AdminController@addCountry');
+    Route::get('/State', 'AdminController@State');
+    Route::get('/addState', 'AdminController@addState');
+    Route::get('/District', 'AdminController@District');
+    //Route::get('/District', 'DistrictController@index');
+    Route::get('/addDistrict', 'AdminController@addDistrict');
+    Route::get('/Taluk', 'AdminController@Taluk');
+    Route::get('/addTaluk', 'AdminController@addTaluk');
+    Route::get('/Panchayat', 'AdminController@Panchayat');
+    Route::get('/addPanchayat', 'AdminController@addPanchayat');
+    Route::get('/Village', 'AdminController@Village');
+    Route::get('/addVillage', 'AdminController@addVillage');
+
     Route::get('/WasteColors', 'AdminController@WasteColors');
     Route::get('/addwastecolor', 'AdminController@addwastecolor');
     Route::get('/WasteTypes', 'AdminController@WasteTypes');
     Route::get('/addwastetype', 'AdminController@addwastetype');
-    Route::get('/Country', 'AdminController@Country');
-    Route::get('/State', 'AdminController@State');
-    Route::get('/District', 'AdminController@District');
-    Route::get('/Taluk', 'AdminController@Taluk');
-    Route::get('/Panchayat', 'AdminController@Panchayat');
-    Route::get('/Village', 'AdminController@Village');
-    Route::get('/addindustry', 'AdminController@addindustry');
+    Route::get('/VehicleTypes', 'AdminController@VehicleType');
+    Route::get('/addvehicletype', 'AdminController@addvehicletype');
+    Route::get('/IndustryTypes', 'AdminController@IndustryTypes');
+    Route::get('/addindustrytype', 'AdminController@addindustrytype');
+
     Route::get('/Roles', 'AdminController@roles');
     Route::get('/addroles', 'AdminController@addroles');
+    //Route::get('/Employees', 'AdminController@Employees');
+    //Route::get('/addemployee', 'AdminController@addroles');
+
+    Route::get('/WasteGenerators', 'AdminController@WasteGenerator');
+    Route::get('/addindustry', 'AdminController@addindustry');
+    Route::get('/WasteDisposals', 'AdminController@WasteDisposalFacilities');
     Route::get('/addrecycleplant', 'AdminController@addrecycleplant');
-    Route::get('/addvehicletype', 'AdminController@addvehicletype');
-    Route::get('/addemployee', 'AdminController@addroles');
+
+    Route::get('/addroute', 'AdminController@addroute');
+    Route::post('/routelocations', 'AdminController@routelocations');
+    Route::get('/driverroute', 'AdminController@driverroute');
+    Route::post('/createdriverroute', 'AdminController@createdriverroute');
+        
     Route::get('/settings', 'AdminController@settings');
     Route::get('/RouteManagement', 'AdminController@routemanagement');
-    Route::get('/addroute', 'AdminController@addroute');
-
+    
 });
-
 
 
 Route::get('/addindustrybranch', 'Admin\AdminController@addindustrybranch');

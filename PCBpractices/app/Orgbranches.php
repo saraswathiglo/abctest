@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Locations extends Model
+class Orgbranches extends Model
 {
     protected $table = 'tblbranchs';
 }

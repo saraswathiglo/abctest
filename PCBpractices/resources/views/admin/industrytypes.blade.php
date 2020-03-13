@@ -35,14 +35,14 @@
                             <thead>
                             <tr>
                                 <th>S.No.</th>
-                                <th>Name</th>
+                                <th>Industry Type</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>Levelled up</td>
+                                <td>Schools</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>
@@ -57,7 +57,22 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>Ui design completed</td>
+                                <td>Hospitals</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm" title="VIEW">
+                                        <span class="mdi mdi-eye"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-sm" title="EDIT">
+                                        <span class="mdi mdi-tooltip-edit"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm" title="DELETE">
+                                        <span class="mdi mdi-delete"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Shopping Malls</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>

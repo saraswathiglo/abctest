@@ -28,7 +28,7 @@
                     <div class="col-md-12 stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <p class="card-title">Industry Types</p>
+                                <p class="card-title">Waste Colors</p>
                                 <div class="table-responsive">
                                     <table id="recent-purchases-listing" class="table">
                                         <thead>
@@ -36,16 +36,14 @@
                                                 <th>S.No.</th>
                                                 <th>Name</th>
                                                 <th>Color</th>
-                                                <th>Color Code</th>
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
-                                                <td>aaa</td>
-                                                <td>red</td>
-                                                <td>#ff0000</td>
+                                                <td>Bio-Medical</td>
+                                                <td>BLUE</td>
                                                 <td>
                                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                                         <span class="mdi mdi-eye"></span>
@@ -60,9 +58,8 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>bbb</td>
-                                                <td>black</td>
-                                                <td>#000000</td>
+                                                <td>Solid</td>
+                                                <td>BLACK</td>
                                                 <td>
                                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                                         <span class="mdi mdi-eye"></span>

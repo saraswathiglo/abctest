@@ -30,7 +30,7 @@
         <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Industry Types</p>
+                    <p class="card-title">Waste Types</p>
 
                     <div class="table-responsive">
                         <table id="recent-purchases-listing" class="table">
@@ -38,15 +38,13 @@
                             <tr>
                                 <th>S.No.</th>
                                 <th>Name</th>
-                                <th>Color</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>abcd</td>
-                                <td>Red</td>
+                                <td>Bio-Medical</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>
@@ -61,8 +59,22 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>wxyz</td>
-                                <td>Blue</td>
+                                <td>Solid</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm" title="VIEW">
+                                        <span class="mdi mdi-eye"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-sm" title="EDIT">
+                                        <span class="mdi mdi-tooltip-edit"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm" title="DELETE">
+                                        <span class="mdi mdi-delete"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>E-Waste</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>

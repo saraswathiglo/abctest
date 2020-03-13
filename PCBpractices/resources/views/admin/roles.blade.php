@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                     <div class="mr-md-3 mr-xl-5">
-                        <h3>Industries</h3>
+                        <h3>Roles</h3>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
@@ -42,7 +42,7 @@
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>ABC</td>
+                                <td>Admin</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>
@@ -57,7 +57,37 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>XYZ</td>
+                                <td>Transporter</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm" title="VIEW">
+                                        <span class="mdi mdi-eye"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-sm" title="EDIT">
+                                        <span class="mdi mdi-tooltip-edit"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm" title="DELETE">
+                                        <span class="mdi mdi-delete"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Guest</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm" title="VIEW">
+                                        <span class="mdi mdi-eye"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-sm" title="EDIT">
+                                        <span class="mdi mdi-tooltip-edit"></span>
+                                    </a>
+                                    <a href="#" class="btn btn-danger btn-sm" title="DELETE">
+                                        <span class="mdi mdi-delete"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Employee</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>

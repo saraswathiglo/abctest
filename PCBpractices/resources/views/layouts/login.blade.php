@@ -317,15 +317,15 @@
         }
     </style>
 </head>
-<body>
-<div id="app">
+    <body>
+        <div id="app">
 
-    <main class="py-4">
-        @yield('content')
-    </main>
-    <footer class="footer">
-        &copy; All rights reserved
-    </footer>
-</div>
-</body>
+            <main class="py-4">
+                @yield('content')
+            </main>
+            <footer class="footer">
+                <?php echo Date('Y'); ?> MV INFRA SERVICES PVT., LTD. &copy; All rights reserved
+            </footer>
+        </div>
+    </body>
 </html>

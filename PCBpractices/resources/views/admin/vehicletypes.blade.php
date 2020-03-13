@@ -7,7 +7,7 @@
             <div class="d-flex justify-content-between flex-wrap">
                 <div class="d-flex align-items-end flex-wrap">
                     <div class="mr-md-3 mr-xl-5">
-                        <h3>Vehicles</h3>
+                        <h3>Vehicle Types</h3>
                     </div>
                 </div>
                 <div class="d-flex justify-content-between align-items-end flex-wrap">
@@ -28,7 +28,7 @@
         <div class="col-md-12 stretch-card">
             <div class="card">
                 <div class="card-body">
-                    <p class="card-title">Vehicles</p>
+                    <p class="card-title">Vehicle Types</p>
 
                     <div class="table-responsive">
                         <table id="recent-purchases-listing" class="table">
@@ -36,13 +36,15 @@
                             <tr>
                                 <th>S.No.</th>
                                 <th>Vehicle Type</th>
+                                <th>Vehicle Number</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>1</td>
-                                <td>ABC</td>
+                                <td>Truck</td>
+                                <td>TS00 1234</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>
@@ -57,7 +59,8 @@
                             </tr>
                             <tr>
                                 <td>2</td>
-                                <td>XYZ</td>
+                                <td>Container</td>
+                                <td>AP4Z 4321</td>
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm" title="VIEW">
                                         <span class="mdi mdi-eye"></span>

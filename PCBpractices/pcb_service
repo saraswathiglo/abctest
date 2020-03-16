@@ -27,3 +27,15 @@ Header Token ==> NO422vQe9JdoIARrKVGNHErOT9SeulajgdMgpi7410NzS9l9NqjMt4uAF7eAnIG
 Response ==> {"status":"success","result":{"DisplayName":"Driver Two","VehicleName":"truck","VehicleNumber":"AP02 1111","AssignmentId":1,"StartDate":"2020-04-12","StartTime":"10:30:00","UId":6,"locations":[{"BranchId":2,"BranchName":"narayana amerpet","Latitude":"17.4375084","Longitude":"78.4482441","Location":"Ameerpet, Hyderabad, Telangana, India"},{"BranchId":4,"BranchName":"sri chaithanya","Latitude":"17.4432902","Longitude":"78.4874663","Location":"Paradise Circle, Sandhu Apartment, Kalasiguda, Secunderabad, Telangana"},{"BranchId":5,"BranchName":"sri uppal","Latitude":"17.434026","Longitude":"78.5582652","Location":"Uppal, Hyderabad, Telangana, India"}]},"message":"Success"}
 
 Failure ==> {"status":"failed","result":[],"message":"Route Not Assigned."}
+
+
+Waste Collections
+----------------------
+Request ==> Base_URL/wastecollection
+Request Type ==> POST
+Request ==> {"AssignmentId":"", "BranchId":"", "UId":"", "ArrivedDateTime":"", "PickedUpDateTime":"", "QrCode":"", "Weight":""}
+Header Token ==> B2TYnO9sOIhb6oag7TNlSXXzG2PRH6P1Cp7BbpHRLOLoSunXm2sjG4FIqhtCgUavbayDuTsDrJlKjmrsDbkQ4hRtdpaYro8P9oRK04LeIr2czejShh8LBYHUDoMvoI9M7VUO5nYLDFC4jDzlyCpjUU2020-03-1313:02:59
+
+Response ==> {"status":"success","result":[{"PickupId":11,"AssignmentId":1,"BranchId":2,"UId":6,"EntityId":6,"ArrivedDateTime":"2020-03-16 06:51:22","PickedUpDateTime":"2020-03-16 06:51:22","QrCode":"718459","Weight":"5.00000"}],"message":"Success"}
+
+Failure ==> {"status":"failed","result":[],"message":"Invalid User."}

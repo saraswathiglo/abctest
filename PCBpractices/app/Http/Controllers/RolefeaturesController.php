@@ -4,11 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Rolefeatures;
+use App\Logs;
 use Validator;
-use DB;
+use Auth;
 
 class RolefeaturesController extends Controller
 {
+    /*public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permissions:districts,view', ['only' => ['index','show']]);
+        $this->middleware('permissions:districts,create', ['only' => ['store']]);
+        $this->middleware('permissions:districts,update', ['only' => ['edit','update']]);
+        $this->middleware('permissions:districts,delete', ['only' => ['destroy']]);
+    }*/
+
     public function index()
     {
         $role_fea = Rolefeatures::get();

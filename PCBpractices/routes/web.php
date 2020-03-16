@@ -48,11 +48,11 @@ Route::group(array('prefix'=>'admin', 'namespace' => 'Admin'), function() {
     
     Route::get('/Country', 'AdminController@Country');
     Route::get('/addCountry', 'AdminController@addCountry');
-    Route::get('/State', 'AdminController@State');
-    Route::get('/addState', 'AdminController@addState');
+    //Route::get('/State', 'AdminController@State');
+    //Route::get('/addState', 'AdminController@addState');
     Route::get('/District', 'AdminController@District');
     //Route::get('/District', 'DistrictController@index');
-    Route::get('/addDistrict', 'AdminController@addDistrict');
+    //Route::get('/addDistrict', 'AdminController@addDistrict');
     Route::get('/Taluk', 'AdminController@Taluk');
     Route::get('/addTaluk', 'AdminController@addTaluk');
     Route::get('/Panchayat', 'AdminController@Panchayat');
@@ -69,8 +69,8 @@ Route::group(array('prefix'=>'admin', 'namespace' => 'Admin'), function() {
     Route::get('/IndustryTypes', 'AdminController@IndustryTypes');
     Route::get('/addindustrytype', 'AdminController@addindustrytype');
 
-    Route::get('/Roles', 'AdminController@roles');
-    Route::get('/addroles', 'AdminController@addroles');
+    //Route::get('/Roles', 'AdminController@roles');
+    //Route::get('/addroles', 'AdminController@addroles');
     //Route::get('/Employees', 'AdminController@Employees');
     //Route::get('/addemployee', 'AdminController@addroles');
 
@@ -89,6 +89,10 @@ Route::group(array('prefix'=>'admin', 'namespace' => 'Admin'), function() {
     
 });
 
+//Route::resource('districts', 'DistrictController')->middleware('permissions:districts,view');
+Route::resource('districts', 'DistrictController');
+Route::resource('states', 'StateController');
+Route::resource('/roles', 'RoleController');
 
 Route::get('/addindustrybranch', 'Admin\AdminController@addindustrybranch');
 Route::get('/addrecycleplantbranch', 'Admin\AdminController@addrecycleplantbranch');

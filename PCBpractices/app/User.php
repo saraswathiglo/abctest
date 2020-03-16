@@ -114,5 +114,29 @@ class User extends Authenticatable
             return 0;
         }
         return 0;
+
+        /*
+          public function handle($request, Closure $next, $features, $operations)
+    {
+        $oper = Operations::where('OperationName',$operations)->first();        
+        $role = Auth::user()->RoleId;
+        $featur = Rolefeatures::where('RoleId',$role)
+        ->where('OperationId','=', $oper->OperationId)
+        ->join('tblfeatures', function ($join) use($features,$oper) {
+            $join->on('tblfeatures.FeatureId', '=', 'tblrolefeatures.FeatureId')
+                 ->where('tblfeatures.FeatureName','=', $features);
+        })
+        ->first();
+        if ($featur) {
+            return $next($request);
+        }
+        return redirect()->back();
+       
+    }
+}
+
+
+
+        */
     }
 }

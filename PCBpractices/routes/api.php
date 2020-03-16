@@ -111,7 +111,7 @@ Route::delete('rolefeature/{rid}/{fid}/{oid}', 'RolefeaturesController@delete');
 Route::post('user', 'UserController@store'); //api through registration
 Route::post('signin', 'UserController@signin');
 Route::middleware('auth:api')->post('transporterroute', 'TransporterController@transporterroute');
-Route::middleware('auth:api')->post('wastepickups', 'TransporterController@wastepickups');
+Route::middleware('auth:api')->post('wastecollection', 'TransporterController@wastecollection');
 
 //Route::get('driverassignment', 'TransporterController@driverassignment');
 //Route::post('loginaccess', 'UserController@loginaccess');

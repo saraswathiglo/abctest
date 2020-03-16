@@ -70,30 +70,42 @@ class TransporterController extends Controller
     }
 
 
-    public function wastepickups(Request $request)
+    public function wastecollection(Request $request)
     {
-    	$AssignmentId = 1;
-    	$BranchId = 2;
-    	$UId = 6;
-    	$EntityId = 6; // Waste type id from lookupentity tbl 5,6,7
-    	$ArrivedDateTime = Date('Y-m-d H:i:s');
-    	$PickedUpDateTime = Date('Y-m-d H:i:s');
-    	$QrCode = rand(10000,1000000);
-    	$Weight = rand(1,5);
+        $user = new User();
+        $FeatureId = 30;
+        $OperationId = 2;
+        $result = [];
+        
+        if(Auth::id()) {
+            $checkpermission = $user->checkrolefeatureoperation(Auth::id(), $FeatureId, $OperationId);
+            if($checkpermission){
+            	$AssignmentId = 1;
+            	$BranchId = 2;
+            	$UId = 6;
+            	$EntityId = 6; // Waste type id from lookupentity tbl 5,6,7
+            	$ArrivedDateTime = Date('Y-m-d H:i:s');
+            	$PickedUpDateTime = Date('Y-m-d H:i:s');
+            	$QrCode = rand(10000,1000000);
+            	$Weight = rand(1,5);
 
-    	$requestdata = array(
-    		'AssignmentId' => $AssignmentId,
-    		'BranchId' => $BranchId,
-    		'UId' => $UId,
-    		'EntityId' => $EntityId,
-    		'ArrivedDateTime' => $ArrivedDateTime,
-    		'PickedUpDateTime' => $PickedUpDateTime,
-    		'QrCode' => $QrCode,
-    		'Weight' => $Weight,
-    	);
-    	$requestid = DB::table('tblpickups')->insertGetId($requestdata);
-    	$response = DB::table('tblpickups')->where('PickupId', $requestid)->get();
-    	return response()->json(['status'=>'success', 'result' => $response, 'message' => 'Success']);
+            	$requestdata = array(
+            		'AssignmentId' => $AssignmentId,
+            		'BranchId' => $BranchId,
+            		'UId' => $UId,
+            		'EntityId' => $EntityId,
+            		'ArrivedDateTime' => $ArrivedDateTime,
+            		'PickedUpDateTime' => $PickedUpDateTime,
+            		'QrCode' => $QrCode,
+            		'Weight' => $Weight,
+            	);
+            	$requestid = DB::table('tblpickups')->insertGetId($requestdata);
+            	$response = DB::table('tblpickups')->where('PickupId', $requestid)->get();
+            	return response()->json(['status'=>'success', 'result' => $response, 'message' => 'Success']);
+            }
+            return response()->json(['status'=>'failed', 'result' => $result, 'message' => 'Invalid User']);
+        }
+        return response()->json(['status'=>'failed', 'result' => $result, 'message' => 'Invalid User']);
     }
 
 

@@ -90,9 +90,24 @@ Route::group(array('prefix'=>'admin', 'namespace' => 'Admin'), function() {
 });
 
 //Route::resource('districts', 'DistrictController')->middleware('permissions:districts,view');
-Route::resource('districts', 'DistrictController');
+
+//Route::resource('country', 'StateController');
 Route::resource('states', 'StateController');
+Route::resource('districts', 'DistrictController');
+Route::resource('taluka', 'TalukaController');
+Route::resource('panchayatee', 'PanchayteeController');
+Route::resource('village', 'VillageController');
 Route::resource('/roles', 'RoleController');
+Route::resource('/rolefeatures', 'RolefeaturesController');
+Route::resource('/routes', 'RouteController');
+Route::resource('/routelocation', 'RoutelocationController');
+Route::resource('/wastegenerator', 'WasteGeneratorController');
+Route::resource('/wastetypes', 'WastetypesController');
+Route::resource('/wastecolors', 'WastecolorsController');
+Route::resource('/vehicletypes', 'VehicletypesController');
+Route::resource('/industrytypes', 'IndustryController');
+Route::resource('/driverroutes', 'DriverrouteController');
+//Route::resource('/vehicles', 'VehiclesController');
 
 Route::get('/addindustrybranch', 'Admin\AdminController@addindustrybranch');
 Route::get('/addrecycleplantbranch', 'Admin\AdminController@addrecycleplantbranch');

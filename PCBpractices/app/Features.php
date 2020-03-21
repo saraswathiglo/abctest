@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Features extends Model
 {
@@ -12,4 +13,8 @@ class Features extends Model
 	protected $fillable = [
     	'FeatureId', 'FeatureName',
     ];
+
+    public function submenufeatures($FeatureTypeId) {
+        return $this->where('FeatureType', 'SubMenu')->where('FeatureTypeId', $FeatureTypeId)->get();
+    }
 }

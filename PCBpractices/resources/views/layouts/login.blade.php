@@ -324,7 +324,7 @@
                 @yield('content')
             </main>
             <footer class="footer">
-                <?php echo Date('Y'); ?> MV INFRA SERVICES PVT., LTD. &copy; All rights reserved
+                <?php echo Date('Y'); ?> MV INFRA SERVICES PVT. LTD. &copy; All rights reserved
             </footer>
         </div>
     </body>

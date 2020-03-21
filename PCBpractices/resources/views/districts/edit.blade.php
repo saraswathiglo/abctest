@@ -38,7 +38,7 @@
                             <select class="form-control" name="StateId" required="">
                                 <option value="">Select State</option>
                                 @foreach($states as $state)
-                                    <option value="{{ $state->StateId }}"  {{ $editdistrict->StateId == $state->StateId ? 'selected="selected"' : '' }}>{{ $state->StateName }}</option>
+                                    <option value="{{ $state->StateId }}" {{ $editdistrict->StateId == $state->StateId ? 'selected="selected"' : '' }}>{{ $state->StateName }}</option>
                                 @endforeach
                             </select>
                             @error('StateId')

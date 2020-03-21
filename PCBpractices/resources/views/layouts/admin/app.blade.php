@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>PCB Admin</title>
     <!-- plugins:css -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">  
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700,300"> -->
     <link rel="stylesheet" href="{{asset('custom/mdi/css/materialdesignicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('custom/base/vendor.bundle.base.css')}}">
     <!-- endinject -->
@@ -18,6 +20,12 @@
     <link rel="stylesheet" href="{{asset('css/dashboard.css')}}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}" />
+
+
+    <!-- Date picker plugins css -->
+    <link href="{{ asset('css/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Daterange picker plugins css -->
+    <link href="{{ asset('css/bootstrap-timepicker.min.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -184,7 +192,8 @@
                     </a>
                     <div class="collapse" id="ui-organizations">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteGenerators') }}">{{ __('Waste Generators') }}</a></li>
+                            <!-- <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteGenerators') }}">{{ __('Waste Generators') }}</a></li> -->
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('wastegenerator') }}">{{ __('Waste Generators') }}</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteDisposals') }}">{{ __('Waste Disposals (Plants)') }}</a></li>
                         </ul>
                     </div>
@@ -198,8 +207,10 @@
                     </a>
                     <div class="collapse" id="ui-routes">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/addroute') }}">{{ __('Add Route Locations') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/driverroute') }}">{{ __('Assign Route') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('routes') }}">{{ __('Routes') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('routelocation/create') }}">{{ __('Add Route Locations') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('driverroutes') }}">{{ __('Assign Route Regular') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/driverroute') }}">{{ __('Assign Route Oncall') }}</a></li>
                         </ul>
                     </div>
                 </li>
@@ -212,7 +223,8 @@
                     </a>
                     <div class="collapse" id="ui-employee">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Roles') }}">{{ __('Roles') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('roles') }}">{{ __('Roles') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('rolefeatures') }}">{{ __('Role Features') }}</a></li>
                             <li class="nav-item"> <a class="nav-link" href="#">{{ __('Employee') }}</a></li>
                         </ul>
                     </div>
@@ -226,10 +238,10 @@
                     </a>
                     <div class="collapse" id="ui-masters">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteColors') }}">{{ __('Waste Colors') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/WasteTypes') }}">{{ __('Waste Types') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/VehicleTypes') }}">{{ __('Vehicle Types') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/IndustryTypes') }}">{{ __('Industry Types') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('wastecolors') }}">{{ __('Waste Types') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('wastetypes') }}">{{ __('Waste Colors') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('vehicletypes') }}">{{ __('Vehicle Types') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('industrytypes') }}">{{ __('Industry Types') }}</a></li>
                         </ul>
                     </div>
                 </li>
@@ -243,11 +255,11 @@
                     <div class="collapse" id="ui-locationmaster">
                         <ul class="nav flex-column sub-menu">
                             <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Country') }}">{{ __('messages.Country') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/State') }}">{{ __('messages.State') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/District') }}">{{ __('messages.District') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Taluk') }}">{{ __('messages.Taluk') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Panchayat') }}">{{ __('messages.Panchayat') }}</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ url('/admin/Village') }}">{{ __('messages.Village') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('states') }}">{{ __('messages.State') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('districts') }}">{{ __('messages.District') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('taluka') }}">{{ __('messages.Taluk') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('panchayatee') }}">{{ __('messages.Panchayat') }}</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ url('village') }}">{{ __('messages.Village') }}</a></li>
 
                         </ul>
                     </div>
@@ -373,7 +385,7 @@
             <footer class="footer" style="z-index: 1030;position: fixed;">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between text-center">
                     <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-                        <?php echo Date('Y');?> MV INFRA SERVICES PVT., LTD. ©  <a href="" target="_blank"></a> All rights reserved.</span>
+                        <?php echo Date('Y');?> MV INFRA SERVICES PVT. LTD. ©  <a href="" target="_blank"></a> All rights reserved.</span>
                 </div>
             </footer>
             <!-- partial -->
@@ -403,6 +415,49 @@
 <script src="{{asset('js/jquery.dataTables.js')}}"></script>
 <script src="{{asset('js/dataTables.bootstrap4.js')}}"></script>
 <!-- End custom js for this page-->
+
+
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+    <!-- Date range Plugin JavaScript -->
+    <script src="{{ asset('js/bootstrap-timepicker.min.js') }}"></script>
+    <script type="text/javascript">
+        var dateToday = new Date();
+        $('#DriverRouteFromDate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+            startDate: dateToday,
+        });
+        $('#DriverRouteToDate').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+            startDate: dateToday,
+        });
+        $('#DriverRouteFromTime').timepicker({
+            use24hours: true,
+            interval: 60,
+            showInputs: false,
+            showMeridian: false,
+            timeFormat: 'hh:mm:ss',
+            disableFocus: true,
+            placement: 'bottom',
+            autoclose: true,
+            default: 'now'
+        });
+        $('#DriverRouteToTime').timepicker({
+            use24hours: true,
+            interval: 60,
+            showInputs: false,
+            showMeridian: false,
+            timeFormat: 'hh:mm:ss',
+            disableFocus: true,
+            placement: 'bottom',
+            autoclose: true,
+            default: 'now'
+        });
+    </script>
 </body>
 
 </html>

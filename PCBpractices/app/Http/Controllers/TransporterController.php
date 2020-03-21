@@ -45,19 +45,44 @@ class TransporterController extends Controller
             $locations = []; $i = 0;
             if(count($assignroute) > 0){
                 foreach ($assignroute as $row) {
+                    $pickupwaste = array(
+                        'AssignmentId' => $row->AssignmentId,
+                        'BranchId' => $row->BranchId,
+                        'UId' => $uid,
+                    );
+                    $checkforpickupwaste = DB::table('tblpickups')->where($pickupwaste)
+                        ->where(DB::raw("(DATE_FORMAT(PickedUpDateTime,'%Y-%m-%d'))"),$today)->get();
                 	$locations[$i]['BranchId'] = $row->BranchId;
                     $locations[$i]['BranchName'] = $row->BranchName;
                     $locations[$i]['Latitude'] = $row->Latitude;
                     $locations[$i]['Longitude'] = $row->Longitude;
-                    $locations[$i]['Location'] = $row->Location;                
+                    $locations[$i]['Location'] = $row->Location;
+
+                    if($checkforpickupwaste->count() > 0){
+                        $locations[$i]['PickedUp'] = 1;
+                        $locations[$i]['Weight'] = $checkforpickupwaste[0]->Weight;
+                        $locations[$i]['QrCode'] = $checkforpickupwaste[0]->QrCode;
+                        $locations[$i]['PickedUpDateTime'] = $checkforpickupwaste[0]->PickedUpDateTime;
+                    }else{
+                        $locations[$i]['PickedUp'] = 0;
+                        $locations[$i]['Weight'] = 0;
+                        $locations[$i]['QrCode'] = 0;
+                        $locations[$i]['PickedUpDateTime'] = 0;
+                    }
 
                     $result = array( 'DisplayName' => $row->DisplayName,
                         'VehicleName' => $row->VehicleName,
                         'VehicleNumber' => $row->VehicleNumber,
-                        'AssignmentId' => $row->AssignmentId,
+                        'AssignmentId' => (int)$row->AssignmentId,
                         'StartDate' => $row->StartDate,
                         'StartTime' => $row->StartTime,
-                        'UId' => $uid,
+                        'UId' => (int)$uid,
+                        'StartPoint' => $row->StartPoint,
+                        'StartPointLatitude' => $row->StartPointLatitude,
+                        'StartPointLongitude' => $row->StartPointLongitude,
+                        'EndPoint' => $row->EndPoint,
+                        'EndPointLatitude' => $row->EndPointLatitude,
+                        'EndPointLongitude' => $row->EndPointLongitude,
                         'locations' => $locations,
                     );
                     $i++;
@@ -72,6 +97,7 @@ class TransporterController extends Controller
 
     public function wastecollection(Request $request)
     {
+
         $user = new User();
         $FeatureId = 30;
         $OperationId = 2;
@@ -80,14 +106,35 @@ class TransporterController extends Controller
         if(Auth::id()) {
             $checkpermission = $user->checkrolefeatureoperation(Auth::id(), $FeatureId, $OperationId);
             if($checkpermission){
-            	$AssignmentId = 1;
+            	/*$AssignmentId = 1;
             	$BranchId = 2;
             	$UId = 6;
             	$EntityId = 6; // Waste type id from lookupentity tbl 5,6,7
             	$ArrivedDateTime = Date('Y-m-d H:i:s');
             	$PickedUpDateTime = Date('Y-m-d H:i:s');
             	$QrCode = rand(10000,1000000);
-            	$Weight = rand(1,5);
+            	$Weight = rand(1,5);*/
+                /*$validator = Validator::make($request->all(), 
+                    [
+                        'AssignmentId' => ['required',],
+                        'BranchId' => ['required',],
+                        'UId' => ['required',],
+                        'QrCode' => ['required',],
+                        'Weight' => ['required',],
+                    ]
+                );
+                if ($validator->fails()) {
+                    return response()->json(['status'=>'failed', 'result' => [], 'message'=> 'Validation Error']);
+                }*/
+
+                $AssignmentId = $request->AssignmentId;
+                $BranchId = $request->BranchId;
+                $UId = $request->UId;
+                $EntityId = 6; // Waste type id from lookupentity tbl 5,6,7
+                $ArrivedDateTime = Date('Y-m-d H:i:s');
+                $PickedUpDateTime = Date('Y-m-d H:i:s');
+                $QrCode = $request->QrCode;
+                $Weight = $request->Weight;
 
             	$requestdata = array(
             		'AssignmentId' => $AssignmentId,

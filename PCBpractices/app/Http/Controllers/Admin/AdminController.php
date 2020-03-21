@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 //use App\Locations;
 use App\Orgbranches;
-use App\Routes;
+use App\Route;
 use App\Routelocations;
 use DB;
 
@@ -183,7 +183,7 @@ class AdminController extends Controller
             ->join('lookupgroups as lg', 'le.GroupId', '=', 'lg.GroupId')
             ->select('ob.*')->where('lg.GroupId','=',3) // 3 = waste generators
             ->get();
-        $routes = Routes::get();
+        $routes = Route::get();
         return view('admin.addroute', ['routes' => $routes, 'locations' => $locations]);
     }
 
@@ -247,7 +247,7 @@ class AdminController extends Controller
 
     public function driverroute()
     {
-        $routes = Routes::get();
+        $routes = Route::get();
         $drivers = DB::table('tblusers')->where('RoleId', 6)->where('Status',1)->get();
         $vehicles = DB::table('tblvehicles')->where('Status',1)->get();
         return view('admin.adddriverroute', ['routes' => $routes, 'drivers' => $drivers, 'vehicles' => $vehicles]);

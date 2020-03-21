@@ -21,4 +21,8 @@ class Role extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /*public function features() {
+        return $this->belongsTo('App\Rolefeatures')->get();
+    }*/
 }
